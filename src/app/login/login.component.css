@@ -1,4 +1,4 @@
-/* .login-container {
+.login-container {
     display: flex;
     background-color: white;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -106,7 +106,7 @@ button:hover {
 button:active {
     transform: translateY(1px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-} */
+}
 
 
 

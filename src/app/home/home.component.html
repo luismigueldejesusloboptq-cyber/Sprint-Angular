@@ -1,0 +1,23 @@
+<div class="home-container">
+  <button class="hamburger-menu" (click)="toggleSidebar()">
+    <i class="bi bi-list"></i>
+  </button>
+
+  <div class="sidebar" [class.visible]="sidebarVisible">
+    <img src="/img/ford.png" alt="Logo Ford" class="logo-sidebar" />
+
+    <a routerLink="/home" class="nav-link" routerLinkActive="active">Home</a>
+    <a routerLink="/dashboard" class="nav-link" routerLinkActive="active"
+      >Dashboard</a
+    >
+
+    <a routerLink="/login" class="nav-link logout">Logout</a>
+  </div>
+
+  <div class="main-content">
+    <div class="welcome-card">
+      <h4>Sistema de dados FORD</h4>
+      <p>Seja bem vindo(a)!</p>
+    </div>
+  </div>
+</div>

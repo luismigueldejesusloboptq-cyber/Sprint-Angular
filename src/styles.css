@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5; 
+    /* display: flex;
+    justify-content: center; 
+    align-items: center;     */
+    height: 100vh;          
+    margin: 0;
+}
+
