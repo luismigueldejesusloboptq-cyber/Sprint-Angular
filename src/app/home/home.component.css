@@ -3,10 +3,12 @@
   height: 100vh;
 
   /* Fundo da página (verde + imagem) */
-  background-color: #384a44; 
+  /* background-color: #384a44;  */
   background-image: url('/img/ranger.png'); 
-  background-size: cover;
+  /* background-size: cover; */
+  background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
 
   /* Para ancorar a sidebar e o hamburger */
   position: relative; 
@@ -25,7 +27,7 @@
 
 /* O Card de Boas-Vindas */
 .welcome-card {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(253, 252, 252, 0.411);
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -46,9 +48,13 @@
   color: white; 
   cursor: pointer;
   z-index: 1001; /* Fica na frente de TUDO */
+  transition: left 0.3s ease-in-out;
   border-radius: 5px;
   padding: 0 5px;
 }
+
+
+
 
 /* A Sidebar (Estado Padrão = ESCONDIDA) */
 .sidebar {
@@ -81,6 +87,7 @@
   width: 100%;
   max-width: 180px; 
   margin-bottom: 30px;
+  margin-top: 60px;
 }
 
 .nav-link {
