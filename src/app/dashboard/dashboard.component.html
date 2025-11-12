@@ -1,0 +1,100 @@
+<div class="loading-overlay" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Carregando dados...</p>
+  </div>
+  
+  <div class="error-message" *ngIf="errorMessage">
+    <p>{{ errorMessage }}</p>
+  </div>
+  
+  <div class="dashboard-container">
+    
+    <header class="dashboard-header">
+      <!-- <div class="header-menu">☰</div> -->
+      <h1>Dashboard FORD</h1>
+      <div class="header-user">
+        <span>AD</span>
+        <a href="#">Logout</a>
+      </div>
+    </header>
+  
+    <main class="dashboard-content">
+      
+      <section class="stats-cards">
+        <!-- Card do Dropdown -->
+        <div class="card">
+          <label>Veículo</label>
+          <!-- Conecta ao 'selectedVehicleId' e chama 'onVehicleChange()' na troca -->
+          <select [(ngModel)]="selectedVehicleId" (ngModelChange)="onVehicleChange()">
+            <!-- Gera os options dinamicamente com a lista 'vehicleModels' -->
+            <option *ngFor="let v of vehicleModels" [value]="v.id">
+              <!-- USA 'v.vehicle' (NOME CORRETO DA API) -->
+              {{ v.vehicle }}
+            </option>
+          </select>
+        </div>
+        
+        <!-- Cards de Dados (usa 'selectedVehicle') -->
+        <div class="card">
+          <label>Total de Vendas</label>
+          <!-- USA 'volumetotal' (NOME CORRETO DA API) -->
+          <div class="value">{{ selectedVehicle?.volumetotal | number }}</div>
+          <div class="unit">Unid.</div>
+        </div>
+        
+        <div class="card">
+          <label>Conectados</label>
+          <!-- USA 'connected' (NOME CORRETO DA API) -->
+          <div class="value">{{ selectedVehicle?.connected | number }}</div>
+          <div class="unit">Unid.</div>
+        </div>
+        
+        <div class="card">
+          <label>Update Software</label>
+          <!-- USA 'softwareUpdates' (NOME CORRETO DA API) -->
+          <div class="value">{{ selectedVehicle?.softwareUpdates | number }}</div>
+          <div class="unit">Unid.</div>
+        </div>
+      </section>
+  
+      <!-- EXIBIÇÃO DO VEÍCULO -->
+      <section class="vehicle-display">
+        <!-- USA 'img' e 'vehicle' (NOMES CORRETOS DA API) -->
+        <img [src]="selectedVehicle?.img" [alt]="selectedVehicle?.vehicle">
+      </section>
+  
+      <!-- TABELA DE DADOS -->
+      <section class="vehicle-data-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Código - Vin</th>
+              <th>Odômetro</th>
+              <th>Nível de Combustível</th>
+              <th>Status</th>
+              <th>Lat.</th>
+              <th>Long.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Mostra a linha da tabela APENAS se 'vehicleData' existir -->
+            <tr *ngIf="vehicleData">
+              <!-- USA OS NOMES CORRETOS DA API: vin, odometro, nivelCombustivel, etc. -->
+              <td>{{ vehicleData.vin }}</td>
+              <td>{{ vehicleData.odometro | number }} Km</td>
+              <td>{{ vehicleData.nivelCombustivel }}%</td>
+              <td>{{ vehicleData.status }}</td>
+              <td>{{ vehicleData.lat }}</td>
+              <td>{{ vehicleData.long }}</td>
+            </tr>
+            
+            <!-- Mensagem para quando não há dados -->
+            <tr *ngIf="!vehicleData && !isLoading && !errorMessage">
+              <td colspan="6">Dados detalhados aparecerão aqui.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      
+    </main>
+  </div>

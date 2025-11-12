@@ -1,7 +1,8 @@
 export interface VehicleModel {
     id: number;
-    odometro: number;
-    status:'on'| 'off';
-    lat: number;
-    long: number;
-}
+    vehicle: string;       // <- O nome do modelo
+    volumetotal: number;   // <- Total de vendas
+    connected: number;     // <- Conectados
+    softwareUpdates: number; // <- Updates
+    img: string;           // <- URL da imagem
+  }
