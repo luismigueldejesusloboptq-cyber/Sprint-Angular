@@ -1,25 +1,42 @@
 <div class="login-container">
-        <div class="login-image">
-            <img src="./img/ranger.png" alt="Ford Ranger">
+    <div class="login-image">
+
+        <img src="./img/ranger.png" alt="Ford Ranger">
+    </div>
+
+    <div class="login-form">
+
+        <div class="logo-ford">
+            <img src="./img/ford.png" alt="Logo da Ford">
         </div>
-        
-        <div class="login-form">
-            
-            <div class="logo-ford">
-                <img src="./img/ford.png" alt="Logo da Ford">
+
+        <h2>Boas Vindas</h2>
+
+        <form id="loginform" (ngSubmit)="fazerLogin()">
+
+            <input type="text" id="username" placeholder="Insira seu e-mail ou usuário" required [(ngModel)]="username"
+                name="username">
+
+
+            <input type="password" id="passaword" placeholder="Insira sua senha" required [(ngModel)]="password"
+                name="password">
+
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+                <label class="form-check-label" for="switchCheckDefault">Logar automaticamente</label>
             </div>
 
-            <h2>Boas Vindas</h2>
-            
-            <form id="loginform" (ngSubmit)="fazerLogin()">
-                <input type="text" id="username" placeholder="Insira seu e-mail ou usuário" required>
-                
-                <input type="password" id="passaword" placeholder="Insira sua senha" required>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
-                    <label class="form-check-label" for="switchCheckDefault">Logar automaticamente</label>
-                  </div>
-                <button type="submit">Entrar</button>
-            </form>
-        </div>
- </div>
+
+            @if (errorMessage) {
+            <div class="error-message">
+                {{ errorMessage }}
+            </div>
+            }
+
+
+            <button type="submit" [disabled]="isLoading">
+                {{ isLoading ? 'Entrando...' : 'Entrar' }}
+            </button>
+        </form>
+    </div>
+</div>
