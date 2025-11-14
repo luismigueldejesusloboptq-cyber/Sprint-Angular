@@ -8,6 +8,9 @@ import { DataService } from '../data.service';
 import { VehicleModel } from '../home/interfaces/vehicle-model.interface';
 import { VehicleData } from '../home/interfaces/vehicle-data.interface';
 
+// ⬇️ ETAPA 1: IMPORTAR O AUTHSERVICE
+import { AuthService } from '../services/auth.Service';
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -39,7 +42,10 @@ export class DashboardComponent implements OnInit {
   public isLoading = true;
   public errorMessage: string = '';
 
+  // --- Injeção de Serviços ---
   private dataService = inject(DataService);
+  // ⬇️ ETAPA 2: INJETAR O AUTHSERVICE
+  private authService = inject(AuthService);
 
   ngOnInit(): void {
     this.loadVehicleList();
@@ -102,5 +108,12 @@ export class DashboardComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  // ⬇️ ETAPA 3: ADICIONAR A FUNÇÃO DE LOGOUT
+  fazerLogout(): void {
+    console.log('DashboardComponent: ➡️ Chamando logout...');
+    this.authService.logout();
+    // O método logout() no AuthService já cuida do redirecionamento para /login
   }
 }
