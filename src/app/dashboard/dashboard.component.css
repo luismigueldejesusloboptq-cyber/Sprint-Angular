@@ -247,3 +247,44 @@
       grid-template-columns: 1fr; /* 1 coluna */
     }
   }
+  
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100vh;
+  background: #ffffff;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.15);
+  padding: 20px;
+  z-index: 2000;
+
+  /* estado fechado */
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+/* quando abre */
+.sidebar.open {
+  transform: translateX(0);
+}
+
+/* overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 1999;
+}
+
+.logo{
+  width: 100%;
+  max-width: 180px; 
+  margin-bottom: 30px;
+  margin-top: 60px;
+}

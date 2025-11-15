@@ -6,10 +6,33 @@
 <div class="error-message" *ngIf="errorMessage">
   <p>{{ errorMessage }}</p>
 </div>
+<!-- SIDEBAR -->
+<div class="sidebar" [class.open]="sidebarVisible">
+
+  <div class="sidebar-header">
+    <img src="/img/ford.png" class="logo" alt="Ford">
+  </div>
+
+  <ul class="menu">
+    <li><a routerLink="/home">Home</a></li>
+    <li><a routerLink="/dashboard">Dashboard</a></li>
+  </ul>
+
+  <button class="logout-btn" (click)="fazerLogout()">Logout</button>
+
+</div>
+
+<!-- OVERLAY PARA FECHAR AO CLICAR FORA -->
+<div class="overlay"
+     *ngIf="sidebarVisible"
+     (click)="toggleSidebar()">
+</div>
 
 <div class="dashboard-container">
 
   <header class="dashboard-header">
+
+ <div class="header-menu" (click)="toggleSidebar()">☰</div>
 
     <h1>Dashboard FORD</h1>
     <div class="header-user">
