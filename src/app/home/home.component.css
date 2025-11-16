@@ -2,20 +2,18 @@
   width: 100vw;
   height: 100vh;
 
-  /* Fundo da página (verde + imagem) */
-  /* background-color: #384a44;  */
+ 
   background-image: url('/img/ranger.png'); 
-  /* background-size: cover; */
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 
-  /* Para ancorar a sidebar e o hamburger */
+
   position: relative; 
-  overflow: hidden; /* Evita barras de rolagem */
+  overflow: hidden; 
 }
 
-/* Conteúdo Principal (onde fica o card) */
+
 .main-content {
   width: 100%;
   height: 100%;
@@ -25,7 +23,7 @@
   padding: 50px;
 }
 
-/* O Card de Boas-Vindas */
+
 .welcome-card {
   background-color: rgba(253, 252, 252, 0.411);
   padding: 30px;
@@ -33,21 +31,21 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   width: 350px; 
   text-align: center;
-  z-index: 10; /* Fica na frente do fundo */
+  z-index: 10; 
 }
 
-/* --- Lógica do Menu Hamburger --- */
+
 
 .hamburger-menu {
   position: absolute; 
   top: 20px;
   left: 20px;
-  background: rgba(0, 0, 0, 0.3); /* Fundo para ser fácil de ver */
+  background: rgba(0, 0, 0, 0.3); 
   border: none;
   font-size: 2em; 
   color: white; 
   cursor: pointer;
-  z-index: 1001; /* Fica na frente de TUDO */
+  z-index: 1001; 
   transition: left 0.3s ease-in-out;
   border-radius: 5px;
   padding: 0 5px;
@@ -56,32 +54,32 @@
 
 
 
-/* A Sidebar (Estado Padrão = ESCONDIDA) */
+
 .sidebar {
   position: absolute;
   top: 0;
   left: 0;
   width: 250px; 
-  height: 100vh; /* Ocupa a altura toda */
-  background-color: rgba(255, 255, 255, 0.95); /* Mais opaca */
+  height: 100vh; 
+  background-color: rgba(255, 255, 255, 0.95); 
   padding: 20px;
   display: flex;
   flex-direction: column;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
 
-  /* Lógica de animação */
-  transform: translateX(-100%); /* Começa fora da tela */
+  
+  transform: translateX(-100%); 
   transition: transform 0.3s ease-in-out;
 
-  z-index: 1000; /* Fica na frente do conteúdo, mas atrás do hamburger */
+  z-index: 1000; 
 }
 
-/* A Sidebar quando está VISÍVEL */
+
 .sidebar.visible {
-  transform: translateX(0%); /* Entra na tela */
+  transform: translateX(0%); 
 }
 
-/* --- Links da Sidebar --- */
+
 
 .logo-sidebar {
   width: 100%;
@@ -103,11 +101,12 @@
   background-color: rgba(0, 0, 0, 0.05);
 }
 .nav-link.active {
-  color: #003478; /* Azul da Ford */
+  color: #003478; 
   background-color: rgba(0, 52, 120, 0.1);
 }
 .nav-link.logout {
-  margin-top: auto; /* Empurra o logout para baixo */
+  margin-top: auto; 
   color: red;
   text-align: center;
 }
+

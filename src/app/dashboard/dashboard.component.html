@@ -6,119 +6,127 @@
 <div class="error-message" *ngIf="errorMessage">
   <p>{{ errorMessage }}</p>
 </div>
-<!-- SIDEBAR -->
-<div class="sidebar" [class.open]="sidebarVisible">
 
-  <div class="sidebar-header">
-    <img src="/img/ford.png" class="logo" alt="Ford">
+<div class="home-container">
+  <button class="hamburger-menu" (click)="toggleSidebar()">
+    <i class="bi bi-list"></i>
+  </button>
+
+  <div class="sidebar" [class.visible]="sidebarVisible">
+    <img src="/img/ford.png" alt="Logo Ford" class="logo-sidebar" />
+
+    <a routerLink="/home" class="nav-link" routerLinkActive="active">Home</a>
+    <a routerLink="/dashboard" class="nav-link" routerLinkActive="active"
+      >Dashboard</a
+    >
+
+    <a (click)="fazerLogout()" routerLink="/login" class="nav-link logout"
+      >Logout</a
+    >
   </div>
 
-  <ul class="menu">
-    <li><a routerLink="/home">Home</a></li>
-    <li><a routerLink="/dashboard">Dashboard</a></li>
-  </ul>
+  <div class="overlay" *ngIf="sidebarVisible" (click)="toggleSidebar()"></div>
 
-  <button class="logout-btn" (click)="fazerLogout()">Logout</button>
-
-</div>
-
-<!-- OVERLAY PARA FECHAR AO CLICAR FORA -->
-<div class="overlay"
-     *ngIf="sidebarVisible"
-     (click)="toggleSidebar()">
-</div>
-
-<div class="dashboard-container">
-
-  <header class="dashboard-header">
-
- <div class="header-menu" (click)="toggleSidebar()">☰</div>
-
-    <h1>Dashboard FORD</h1>
-    <div class="header-user">
-      <span>AD</span>
-      <a (click)="fazerLogout()" style="cursor: pointer;">Logout</a>
-    </div>
-  </header>
-
-  <main class="dashboard-content">
-  
-    <section class="stats-cards">
-
-      <div class="card">
-        <label>Veículo</label>
-
-        <select [(ngModel)]="selectedVehicleId" (ngModelChange)="onVehicleChange()">
-
-          <option *ngFor="let v of vehicleModels" [value]="v.id">
-
-            {{ v.vehicle }}
-          </option>
-        </select>
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <h1>Dashboard FORD</h1>
+      <div class="header-user">
+        <span>AD</span>
+        <a (click)="fazerLogout()" style="cursor: pointer">Logout</a>
       </div>
+    </header>
 
+    <main class="dashboard-content">
+      <section class="stats-cards">
+        <div class="card">
+          <label>Veículo</label>
 
-      <div class="card">
-        <label>Total de Vendas</label>
+          <select
+            [(ngModel)]="selectedVehicleId"
+            (ngModelChange)="onVehicleChange()"
+          >
+            <option *ngFor="let v of vehicleModels" [value]="v.id">
+              {{ v.vehicle }}
+            </option>
+          </select>
+        </div>
 
-        <div class="value">{{ selectedVehicle?.volumetotal | number }}</div>
-        <div class="unit">Unid.</div>
-      </div>
+        <div class="card">
+          <label>Total de Vendas</label>
 
-      <div class="card">
-        <label>Conectados</label>
+          <div class="value">{{ selectedVehicle?.volumetotal | number }}</div>
+          <div class="unit">Unid.</div>
+        </div>
 
-        <div class="value">{{ selectedVehicle?.connected | number }}</div>
-        <div class="unit">Unid.</div>
-      </div>
+        <div class="card">
+          <label>Conectados</label>
 
-      <div class="card">
-        <label>Update Software</label>
+          <div class="value">{{ selectedVehicle?.connected | number }}</div>
+          <div class="unit">Unid.</div>
+        </div>
 
-        <div class="value">{{ selectedVehicle?.softwareUpdates | number }}</div>
-        <div class="unit">Unid.</div>
-      </div>
-    </section>
+        <div class="card">
+          <label>Update Software</label>
 
+          <div class="value">
+            {{ selectedVehicle?.softwareUpdates | number }}
+          </div>
+          <div class="unit">Unid.</div>
+        </div>
+      </section>
 
-    <section class="vehicle-display">
+      <section class="vehicle-display">
+        <img [src]="selectedVehicle?.img" [alt]="selectedVehicle?.vehicle" />
+      </section>
 
-      <img [src]="selectedVehicle?.img" [alt]="selectedVehicle?.vehicle">
-    </section>
+      <section class="search-section">
+        <div class="card search-card">
+          <label>Buscar Código VIN</label>
 
+          <div class="search-wrapper">
+            <input
+              type="text"
+              placeholder="Digite o código VIN..."
+              [(ngModel)]="searchedVin"
+            />
 
-    <section class="vehicle-data-table">
-      <table>
-        <thead>
-          <tr>
-            <th>Código - Vin</th>
-            <th>Odômetro</th>
-            <th>Nível de Combustível</th>
-            <th>Status</th>
-            <th>Lat.</th>
-            <th>Long.</th>
-          </tr>
-        </thead>
-        <tbody>
+            <button (click)="onSearchVin()">Buscar</button>
+          </div>
 
-          <tr *ngIf="vehicleData">
+          <div class="search-error">
+            {{ errorMessage }}
+          </div>
+        </div>
+      </section>
 
-            <td>{{ vehicleData.vin }}</td>
-            <td>{{ vehicleData.odometro | number }} Km</td>
-            <td>{{ vehicleData.nivelCombustivel }}%</td>
-            <td>{{ vehicleData.status }}</td>
-            <td>{{ vehicleData.lat }}</td>
-            <td>{{ vehicleData.long }}</td>
-          </tr>
+      <section class="vehicle-data-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Código - Vin</th>
+              <th>Odômetro</th>
+              <th>Nível de Combustível</th>
+              <th>Status</th>
+              <th>Lat.</th>
+              <th>Long.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="vehicleData">
+              <td>{{ vehicleData.vin }}</td>
+              <td>{{ vehicleData.odometro | number }} Km</td>
+              <td>{{ vehicleData.nivelCombustivel }}%</td>
+              <td>{{ vehicleData.status }}</td>
+              <td>{{ vehicleData.lat }}</td>
+              <td>{{ vehicleData.long }}</td>
+            </tr>
 
-
-          <tr *ngIf="!vehicleData && !isLoading && !errorMessage">
-            <td colspan="6">Dados detalhados aparecerão aqui.</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-  </main>
-  
+            <tr *ngIf="!vehicleData && !isLoading && !errorMessage">
+              <td colspan="6">Dados detalhados aparecerão aqui.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
 </div>

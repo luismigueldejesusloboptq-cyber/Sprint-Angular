@@ -1,290 +1,356 @@
 :host {
-    --primary-blue: #003478; /* Azul da Ford */
-    --light-gray-bg: #f4f7f6;
-    --white-bg: #ffffff;
-    --text-color: #333;
-    --text-light: #666;
-    --border-color: #eee;
-    --error-bg: #ffebee;
-    --error-text: #b71c1c;
-    --error-border: #e57373;
-  }
-  
-  /* --- Estilo Principal do Container --- */
-  .dashboard-container {
-    font-family: Arial, sans-serif;
-    background-color: var(--light-gray-bg);
-    padding: 20px 40px;
-    min-height: 100vh;
-  }
-  
-  /* --- Cabeçalho --- */
-  .dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: 30px;
-  }
-  
-  .dashboard-header h1 {
-    color: var(--primary-blue);
-    margin: 0;
-    font-size: 24px;
-  }
-  
-  .header-menu {
-    font-size: 28px;
-    cursor: pointer;
-    color: var(--text-light);
-  }
-  
-  .header-user {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .header-user span {
-    background: var(--primary-blue);
-    color: var(--white-bg);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    font-weight: bold;
-  }
-  
-  .header-user a {
-    color: var(--primary-blue);
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  /* --- Cards de Estatística --- */
-  .stats-cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 colunas */
-    gap: 20px;
-    margin-bottom: 30px;
-  }
-  
-  .card {
-    background: var(--white-bg);
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s;
-  }
-  
-  .card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-  }
-  
-  .card label {
-    font-size: 14px;
-    color: var(--text-light);
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  .card .value {
-    font-size: 32px;
-    font-weight: bold;
-    color: var(--text-color);
-  }
-  
-  .card .unit {
-    font-size: 14px;
-    color: #999;
-  }
-  
-  /* Estilo para o <select> no primeiro card */
-  .card select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: var(--white-bg);
-    cursor: pointer;
-  }
-  
-  /* --- Imagem do Veículo --- */
-  .vehicle-display {
-    text-align: center;
-    margin-bottom: 30px;
-    background: var(--white-bg);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  }
-  
-  .vehicle-display img {
-    max-width: 600px;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    min-height: 250px; /* Evita que a imagem "pule" ao carregar */
-  }
-  
-  /* --- Tabela de Dados --- */
-  .vehicle-data-table {
-    width: 100%;
-    overflow-x: auto; /* Garante que a tabela seja rolável em telas pequenas */
-  }
-  
-  .vehicle-data-table table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--white-bg);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    border-radius: 8px;
-    overflow: hidden; /* Importante para o border-radius no <thead> */
-  }
-  
-  .vehicle-data-table th,
-  .vehicle-data-table td {
-    padding: 16px;
-    text-align: left;
-    border-bottom: 1px solid var(--border-color);
-    white-space: nowrap; /* Evita que o texto quebre */
-  }
-  
-  .vehicle-data-table thead {
-    background-color: var(--primary-blue);
-    color: white;
-  }
-  
-  .vehicle-data-table thead th {
-    font-weight: 600;
-    border-bottom: none;
-  }
-  
-  .vehicle-data-table tbody tr:hover {
-    background-color: #f9f9f9;
-  }
-  
-  /* Estilo para a linha de "sem dados" */
-  .vehicle-data-table td[colspan="6"] {
-    text-align: center;
-    color: #999;
-    padding: 30px;
-    white-space: normal;
-  }
-  
-  /* --- Estilos de Loading e Erro --- */
-  .loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.85);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-  }
-  
-  .spinner {
-    border: 4px solid #f3f3f3; /* Cinza claro */
-    border-top: 4px solid var(--primary-blue); /* Azul */
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-    margin-bottom: 10px;
-  }
-  
-  .loading-overlay p {
-    font-weight: bold;
-    color: var(--text-color);
-  }
-  
-  .error-message {
-    background: var(--error-bg);
-    color: var(--error-text);
-    padding: 15px 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    border: 1px solid var(--error-border);
-    text-align: center;
-    font-weight: bold;
-  }
-  
-  /* --- Animação do Spinner --- */
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  /* --- Design Responsivo (Mobile) --- */
-  @media (max-width: 992px) {
-    /* Tablets */
-    .stats-cards {
-      grid-template-columns: repeat(2, 1fr); /* 2 colunas */
-    }
-  }
-  
-  @media (max-width: 768px) {
-    /* Celulares */
-    .dashboard-container {
-      padding: 10px 15px;
-    }
-  
-    .dashboard-header {
-      flex-direction: column;
-      gap: 15px;
-    }
-  
-    .stats-cards {
-      grid-template-columns: 1fr; /* 1 coluna */
-    }
-  }
-  
+  --primary-blue: #003478;
+  --light-gray-bg: #f4f7f6;
+  --white-bg: #ffffff;
+  --text-color: #333;
+  --text-light: #666;
+  --border-color: #eee;
+  --error-bg: #ffebee;
+  --error-text: #b71c1c;
+  --error-border: #e57373;
+}
 
-/* SIDEBAR */
-.sidebar {
+.dashboard-container {
+  font-family: Arial, sans-serif;
+  background-color: var(--light-gray-bg);
+  padding: 20px 40px;
+  min-height: 100vh;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 30px;
+  padding-left: 80px;
+}
+
+.dashboard-header h1 {
+  color: var(--primary-blue);
+  margin: 0;
+  font-size: 24px;
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-user span {
+  background: var(--primary-blue);
+  color: var(--white-bg);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: bold;
+}
+
+.header-user a {
+  color: var(--primary-blue);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.stats-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.card {
+  background: var(--white-bg);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.card label {
+  font-size: 14px;
+  color: var(--text-light);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.card .value {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.card .unit {
+  font-size: 14px;
+  color: #999;
+}
+
+.card select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: var(--white-bg);
+  cursor: pointer;
+}
+
+.search-section {
+  margin-bottom: 30px;
+}
+
+.search-card {
+  width: 100%;
+  background-color: #fdfdfd;
+  border-left: 4px solid var(--primary-blue);
+}
+
+.search-wrapper {
+  display: flex;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.search-wrapper input {
+  flex-grow: 1;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  border-right: none;
+  outline: none;
+}
+.search-wrapper input:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 2px rgba(0, 52, 120, 0.15);
+}
+
+.search-wrapper button {
+  padding: 0 25px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.search-wrapper button:hover {
+  background-color: #002a5c;
+}
+
+.search-error {
+  color: var(--error-text);
+  font-weight: bold;
+  margin-top: 10px;
+  min-height: 1.2em;
+}
+
+.vehicle-display {
+  text-align: center;
+  margin-bottom: 30px;
+  background: var(--white-bg);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.vehicle-display img {
+  max-width: 600px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  min-height: 250px;
+}
+
+.vehicle-data-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.vehicle-data-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white-bg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.vehicle-data-table th,
+.vehicle-data-table td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.vehicle-data-table thead {
+  background-color: var(--primary-blue);
+  color: white;
+}
+
+.vehicle-data-table thead th {
+  font-weight: 600;
+  border-bottom: none;
+}
+
+.vehicle-data-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.vehicle-data-table td[colspan="6"] {
+  text-align: center;
+  color: #999;
+  padding: 30px;
+  white-space: normal;
+}
+
+.loading-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 240px;
-  height: 100vh;
-  background: #ffffff;
-  box-shadow: 2px 0 10px rgba(0,0,0,0.15);
-  padding: 20px;
-  z-index: 2000;
-
-  /* estado fechado */
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 
-/* quando abre */
-.sidebar.open {
-  transform: translateX(0);
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--primary-blue);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
 }
 
-/* overlay */
+.loading-overlay p {
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.error-message {
+  display: none;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 992px) {
+  .stats-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 10px 15px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    gap: 15px;
+    padding-left: 0;
+  }
+
+  .stats-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
 .overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.3);
-  z-index: 1999;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999;
 }
 
-.logo{
+.hamburger-menu {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border: none;
+  font-size: 2em;
+  color: white;
+  cursor: pointer;
+  z-index: 1001;
+  transition: left 0.3s ease-in-out;
+  border-radius: 5px;
+  padding: 0 5px;
+}
+
+.sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.sidebar.visible {
+  transform: translateX(0%);
+}
+
+.logo-sidebar {
   width: 100%;
-  max-width: 180px; 
+  max-width: 180px;
   margin-bottom: 30px;
   margin-top: 60px;
+}
+
+.nav-link {
+  color: #333;
+  text-decoration: none;
+  padding: 10px 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  display: block;
+  border-radius: 4px;
+}
+.nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.nav-link.active {
+  color: #003478;
+  background-color: rgba(0, 52, 120, 0.1);
+}
+.nav-link.logout {
+  margin-top: auto;
+  color: red;
+  text-align: center;
 }
